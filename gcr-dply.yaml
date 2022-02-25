@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task2
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: us-central1-docker.pkg.dev/high-apricot-342105/my-docker-repo/myimage:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+       

@@ -19,14 +19,15 @@ steps:
     args: ['push','marutidock/flask_gcp']
 
   
-  # # Docker Build
-  # - name: 'gcr.io/cloud-builders/docker'
-  #   args: ['build', '-t','us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage1','.']
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t','us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage1','.']
 
-  # # Docker Push
-  # - name: 'gcr.io/cloud-builders/docker'
-  #   args: ['push', 
-  #          'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage1']
+  # Docker Push
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 
+           'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage1']
+
 
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['create','-f','dockerhub-dply.yaml']
@@ -34,11 +35,17 @@ steps:
       - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
       - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
     
+  # - name: 'gcr.io/cloud-builders/kubectl'
+  #   args: ['create','-f','dockerhub-svc.yaml']
+  #   env:
+  #     - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
+  #     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+
   - name: 'gcr.io/cloud-builders/kubectl'
-    args: ['create','-f','dockerhub-svc.yaml']
+    args: ['create','-f','gcr-dply.yaml']
     env:
       - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
-      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'  
   
 
   

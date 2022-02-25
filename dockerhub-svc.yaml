@@ -5,6 +5,7 @@ metadata:
 spec:
   selector:
     app: task1
+  
   ports:
   - port: 80
     targetPort: 8080
