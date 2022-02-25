@@ -8,6 +8,9 @@ steps:
     args: ['-c', 'docker login --username=marutidock --password=Mtech@123']
     # secretEnv: ['USERNAME', 'PASSWORD']
 
+  - name: 'gcr.io/cloud-builders/gcloud'
+
+    args: ['-c','gcloud container clusters get-credentials task-cluster --zone=us-central1-a --project=high-apricot-342105']
     
     
   - name: 'gcr.io/cloud-builders/docker'
@@ -31,4 +34,9 @@ steps:
 
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['create','-f','dockerhub-dply.yaml']
+    env:
+      - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
+      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+    
 
+  
