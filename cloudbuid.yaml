@@ -7,7 +7,7 @@ steps:
     args: ['tag','myimage:${SHORT_SHA}','marutidock/flask_gcp']
 
   - name: 'docker'
-    args: ['push','marutidock/flask_gcp']
+    args: ['push','marutidock/flask_gcp:${SHORT_SHA}']
 
 
 
