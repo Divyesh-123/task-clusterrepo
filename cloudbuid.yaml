@@ -1,0 +1,26 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 
+           'us-central1-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/myimage:${SHORT_SHA}', '.']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['tag','myimage:${SHORT_SHA}','marutidock/flask_gcp']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push','marutidock/flask_gcp']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push','us-central1-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/myimage:${SHORT_SHA}']
+
+
+artifacts:
+  objects:
+    location: gs://${_BUCKET_NAME}/
+    paths:
+      - ${SHORT_SHA}_test_log.xml
+# [END cloudbuild_python_logs_yaml]
+# Store images in Google Artifact Registry
+images:
+  - us-central1-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/myimage:${SHORT_SHA}
+
+
