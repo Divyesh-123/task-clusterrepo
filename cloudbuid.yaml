@@ -8,9 +8,6 @@ steps:
     args: ['-c', 'docker login --username=marutidock --password=Mtech@123']
     # secretEnv: ['USERNAME', 'PASSWORD']
 
-  - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
-    args: ['-c','gcloud container clusters get-credentials task-cluster --zone=us-central1-a --project=high-apricot-342105']
     
     
   - name: 'gcr.io/cloud-builders/docker'
