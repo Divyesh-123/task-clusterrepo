@@ -1,8 +1,13 @@
 steps:
+  
   - name: 'gcr.io/cloud-builders/git'
     args: ['clone','https://github.com/Divyesh-123/task-clusterrepo.git']
-    
 
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: ['-c', 'docker login --username=marutidock --password=Mtech@123']
+    # secretEnv: ['USERNAME', 'PASSWORD']
+    
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t','gcpimg', '.']
 
