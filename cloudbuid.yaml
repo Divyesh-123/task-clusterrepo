@@ -34,5 +34,11 @@ steps:
       - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
       - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
     
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: ['create','-f','dockerhub-svc.yaml']
+    env:
+      - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
+      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+  
 
   
