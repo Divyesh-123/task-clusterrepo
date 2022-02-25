@@ -7,6 +7,10 @@ steps:
     entrypoint: 'bash'
     args: ['-c', 'docker login --username=marutidock --password=Mtech@123']
     # secretEnv: ['USERNAME', 'PASSWORD']
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['container', 'clusters', 'get-credentials', 'task-cluster', '--zone', 'us-central1-a', '--project', 'high-apricot-342105']
+    
     
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t','gcpimg', '.']
@@ -17,17 +21,16 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push','marutidock/flask_gcp']
 
+  
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t','us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage1','.']
 
+  # Docker Push
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 
+           'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage1']
 
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: ['create','-f','dockerhub-dply.yaml']
 
-# steps:
-#   # Docker Build
-#   - name: 'gcr.io/cloud-builders/docker'
-#     args: ['build', '-t', 
-#            'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage', 
-#            '.']
-
-#   # Docker Push
-#   - name: 'gcr.io/cloud-builders/docker'
-#     args: ['push', 
-#            'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage']
