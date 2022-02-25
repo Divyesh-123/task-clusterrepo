@@ -9,7 +9,7 @@ steps:
     # secretEnv: ['USERNAME', 'PASSWORD']
 
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['container', 'clusters', 'get-credentials', 'task-cluster' '--zone=us-central1-a --project=high-apricot-342105']
+    args: ['container', 'clusters', 'get-credentials', 'task-cluster', '--zone=us-central1-a --project=high-apricot-342105']
     
     
   - name: 'gcr.io/cloud-builders/docker'
