@@ -1,9 +1,10 @@
 apiVersion: v1
-kind: Endpoints
+kind: Service
 metadata:
   name: tasksvc
-subsets:
-  - addresses:
-      - ip: 27.109.3.34
-    ports:
-      - port: 32
+spec:
+  selector:
+    app: task1
+  ports:
+  - port: 80
+    targetPort: 8080
