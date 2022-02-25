@@ -1,12 +1,12 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t','myimage:${SHORT_SHA}', '.']
+    args: ['build', '-t','gcpimg', '.']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['tag','myimage:${SHORT_SHA}','marutidock/flask_gcp']
+    args: ['tag','gcpimg','marutidock/flask_gcp']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push','marutidock/flask_gcp:${SHORT_SHA}']
+    args: ['push','marutidock/flask_gcp']
 
 
 
