@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: gcr.io/${PROJECT_ID}/${IMG_NAME}
+        image: gcr.io/high-apricot-342105/myimage1
         resources:
           limits:
             memory: "128Mi"
