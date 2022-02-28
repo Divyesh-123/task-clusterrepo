@@ -45,12 +45,11 @@ steps:
   #     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
 
   - name: 'gcr.io/cloud-builders/kubectl'
-    args: ['create','-f','gcr-dply.yaml']
+    entrypoint: 'bash'
+    args: ['cat gcr-dply.yaml | sed "s/{{SHA}}/${SHORT_SHA}/g" | kubectl apply -f -']
     env:
       - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
       - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'  
-      - 'PROJECT_ID=${PROJECT_ID}'
-      - 'IMG_NAME=myimage1:${SHORT_SHA}'
   
 
   
