@@ -16,7 +16,7 @@ steps:
     args: ['tag','gcpimg:${SHORT_SHA}','marutidock/flask_gcp']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push','marutidock/flask_gcp']
+    args: ['push','marutidock/flask_gcp:${SHORT_SHA}']
 
   
   # Docker Build
