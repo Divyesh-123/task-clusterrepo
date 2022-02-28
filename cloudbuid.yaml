@@ -10,10 +10,10 @@ steps:
 
     
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t','gcpimg', '.']
+    args: ['build', '-t','gcpimg:${SHORT_SHA}', '.']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['tag','gcpimg','marutidock/flask_gcp']
+    args: ['tag','gcpimg:${SHORT_SHA}','marutidock/flask_gcp']
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push','marutidock/flask_gcp']
