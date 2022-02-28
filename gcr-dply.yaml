@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: us-central1-docker.pkg.dev/high-apricot-342105/my-docker-repo/myimage:latest
+        image: us-central1-docker.pkg.dev/high-apricot-342105/my-docker-repo/myimage1:latest
         resources:
           limits:
             memory: "128Mi"
