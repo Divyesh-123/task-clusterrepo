@@ -43,9 +43,9 @@ steps:
 # - name: 'bash'
 #   args: ['sed','s/SHA/$SHORT_SHA/','gcr-dply.yaml']
 
-- name: 'gcr.io/cloud-builders/kubectl'
+- name: 'gcr.io/cloud-builders/ubuntu'
   entrypoint: 'bash'
-  args: ['sed', 's/{{SHA}}/${SHORT_SHA}/g', 'gcr-dply.yaml','|','kubectl apply -f -']
+  args: ['sed','s/{{SHA}}/${SHORT_SHA}/','gcr-dply.yaml','|','kubectl apply -f -']
   env:
     - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'  
