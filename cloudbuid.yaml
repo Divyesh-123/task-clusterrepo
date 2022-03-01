@@ -40,12 +40,12 @@ steps:
   #     - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
   #     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
 
-- name: 'bash'
-  args: ['sed','s/SHA/$SHORT_SHA/','gcr-dply.yaml']
+# - name: 'bash'
+#   args: ['sed','s/SHA/$SHORT_SHA/','gcr-dply.yaml']
 
 - name: 'gcr.io/cloud-builders/kubectl'
   entrypoint: 'bash'
-  args: ['cat gcr-dply.yaml | sed "s/{{SHA}}/${SHORT_SHA}/g" | kubectl apply -f -']
+  args: ['cat', 'gcr-dply.yaml', '|', 'sed "s/{{SHA}}/${SHORT_SHA}/g"', '|','kubectl apply -f -']
   env:
     - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'  
