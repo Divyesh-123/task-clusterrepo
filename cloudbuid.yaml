@@ -43,7 +43,7 @@ steps:
 # - name: 'bash'
 #   args: ['sed','s/SHA/$SHORT_SHA/','gcr-dply.yaml']
 
-- name: 'gcr.io/cloud-builders/ubuntu'
+- name: 'gcr.io/cloud-builders/'
   entrypoint: 'bash'
   args: ['sed','s/{{SHA}}/${SHORT_SHA}/','gcr-dply.yaml','|','kubectl apply -f -']
   env:
