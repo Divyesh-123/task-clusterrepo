@@ -1,30 +1,26 @@
 steps:
-  
-#   - name: 'gcr.io/cloud-builders/git'
-#     args: ['clone','https://github.com/Divyesh-123/task-clusterrepo.git']
-
-  - name: 'gcr.io/cloud-builders/docker'
-    entrypoint: 'bash'
-    args: ['-c', 'docker login --username=marutidock --password=Mtech@123']
+- name: 'gcr.io/cloud-builders/docker'
+   entrypoint: 'bash'
+   args: ['-c', 'docker login --username=marutidock --password=Mtech@123']
     # secretEnv: ['USERNAME', 'PASSWORD']
 
     
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t','gcpimg:${SHORT_SHA}', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t','gcpimg:${SHORT_SHA}', '.']
 
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['tag','gcpimg:${SHORT_SHA}','marutidock/flask_gcp:${SHORT_SHA}']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['tag','gcpimg:${SHORT_SHA}','marutidock/flask_gcp:${SHORT_SHA}']
 
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push','marutidock/flask_gcp:${SHORT_SHA}']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push','marutidock/flask_gcp:${SHORT_SHA}']
 
   
   # Docker Build
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t','gcr.io/${PROJECT_ID}/myimage1:${SHORT_SHA}','.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t','gcr.io/${PROJECT_ID}/myimage1:${SHORT_SHA}','.']
     
-   images:
-    - gcr.io/$PROJECT_ID/myimage1:$SHORT_SHA
+images:
+ - gcr.io/$PROJECT_ID/myimage1:$SHORT_SHA
     
 #   - name: 'gcr.io/cloud-builders/docker'
 #     args: ['tag', 'myimage1', 'gcr.io/${PROJECT_ID}/myimage1:${SHORT_SHA}']
@@ -35,11 +31,11 @@ steps:
 #            'gcr.io/${PROJECT_ID}/myimage1:${SHORT_SHA}']
 
 
-  - name: 'gcr.io/cloud-builders/kubectl'
-    args: ['apply','-f','dockerhub-dply.yaml']
-    env:
-      - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
-      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply','-f','dockerhub-dply.yaml']
+  env:
+    - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
+    - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
     
   # - name: 'gcr.io/cloud-builders/kubectl'
   #   args: ['apply','-f','dockerhub-svc.yaml']
@@ -47,12 +43,11 @@ steps:
   #     - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
   #     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
 
-  - name: 'gcr.io/cloud-builders/kubectl'
-    entrypoint: 'bash'
-    args: ['-c','cat','gcr-dply.yaml', '&&', 'sed', 's/{{SHA}}/${SHORT_SHA}/g','&&','kubectl apply -f -']
-    env:
-      - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
-      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'  
+- name: 'gcr.io/cloud-builders/kubectl'
+  entrypoint: 'bash'
+  args: ['-c','cat','gcr-dply.yaml', '&&', 'sed', 's/{{SHA}}/${SHORT_SHA}/g','&&','kubectl apply -f -']
+  env:
+    - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
+    - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'  
   
 
-  
