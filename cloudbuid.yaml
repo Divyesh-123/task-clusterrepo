@@ -25,8 +25,7 @@ steps:
 
   # Docker Push
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 
-         'gcr.io/${PROJECT_ID}/myimage1:${SHORT_SHA}']
+  args: ['push','gcr.io/${PROJECT_ID}/myimage1:${SHORT_SHA}']
 
 
 - name: 'gcr.io/cloud-builders/kubectl'
@@ -41,9 +40,12 @@ steps:
   #     - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
   #     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
 
+-name: ubuntu
+ entrypoint: ['bash']
+ args: ['-c','sed','s/SHA/$SHORT_SHA/','gcr-dply.yaml']
+
 - name: 'gcr.io/cloud-builders/kubectl'
-  entrypoint: 'bash'
-  args: ['-c','cat','gcr-dply.yaml', '&&', 'sed', 's/{{SHA}}/${SHORT_SHA}/g','&&','kubectl apply -f -']
+  args: ['apply','-f','gcr-dply.yaml']
   env:
     - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'  
