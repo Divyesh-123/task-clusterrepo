@@ -43,7 +43,8 @@ steps:
 # - name: 'bash'
 #   args: ['sed','s/SHA/$SHORT_SHA/','gcr-dply.yaml']
 
-- name: 'bash'
+- name: 'ubuntu'
+  entrypoint: 'bash'
   args: ['sed', 's/{{SHA}}/${SHORT_SHA}','|','kubectl apply -f -']
 #   env:
 #     - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
