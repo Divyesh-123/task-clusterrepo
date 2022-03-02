@@ -47,9 +47,9 @@ steps:
   entrypoint: 'bash'
   args:
   - '-c'
-  - sed 's/{{SHA}}/${SHORT_SHA}/' gcr-dply.yaml | kubectl apply -f -
-
-  
+  - sed 's/{{SHA}}/${SHORT_SHA}/' gcr-dply.yaml 
+  - | 
+  - kubectl apply -f -
   env:
     - 'CLOUDSDK_CONTAINER_CLUSTER=task-cluster'
     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'  
