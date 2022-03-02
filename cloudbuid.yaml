@@ -46,6 +46,7 @@ steps:
 - name: 'gcr.io/cloud-builders/kubectl'
   entrypoint: 'bash'
   args:
+  - '-c'
   - sed 's/{{SHA}}/${SHORT_SHA}/' gcr-dply.yaml | kubectl apply -f -
 
   
