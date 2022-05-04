@@ -29,7 +29,7 @@ steps:
 
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'gcloud'
-  args: ['container','imgaes','add-tag','gcr.io/${PROJECT_ID}/myimage1:${SHORT_SHA}','gcr.io/${PROJECT_ID}/myimage1:latest']
+  args: ['container','imgaes','add-tag','-q','gcr.io/${PROJECT_ID}/myimage1:${SHORT_SHA}','gcr.io/${PROJECT_ID}/myimage1:latest']
 
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply','-f','dockerhub-dply.yaml']
