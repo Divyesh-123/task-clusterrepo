@@ -26,8 +26,9 @@ steps:
   # Docker Push
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push','gcr.io/${PROJECT_ID}/myimage1:${SHORT_SHA}']
-  
-- name: 'gcr.io/cloud-builders/gcloud'
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'gcloud'
   args: ['container','imgaes','add-tag','gcr.io/${PROJECT_ID}/myimage1:${SHORT_SHA}','gcr.io/${PROJECT_ID}/myimage1:latest']
 
 - name: 'gcr.io/cloud-builders/kubectl'
